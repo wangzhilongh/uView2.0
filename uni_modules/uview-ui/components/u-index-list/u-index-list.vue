@@ -128,7 +128,6 @@
 			return {
 				// 当前正在被选中的字母索引
 				activeIndex: -1,
-				touchmoveIndex: 1,
 				// 索引字母的信息
 				letterInfo: {
 					height: 0,
