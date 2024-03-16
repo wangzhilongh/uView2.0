@@ -148,6 +148,8 @@
 				sys: uni.$u.sys(),
 				scrolling: false,
 				scrollIntoView: '',
+				// 本组件所在的位置信息
+				positionData:{},
 			}
 		},
 		computed: {
@@ -182,6 +184,14 @@
 		},
 		mounted() {
 			this.setIndexListLetterInfo()
+
+			const query = uni.createSelectorQuery().in(this);
+			query
+			.select(".u-index-list")
+			.boundingClientRect((data) => {
+				this.positionData = data
+			})
+			.exec();
 		},
 		methods: {
 			init() {
@@ -358,6 +368,8 @@
 				// #ifndef APP-NVUE
 				// 非nvue通过detail获取滚动条位移
 				scrollTop = e.detail.scrollTop
+				// 加上本组件自身高度偏移量
+				scrollTop += this.positionData.top
 				// #endif
 				for (let i = 0; i < len; i++) {
 					const item = children[i],
